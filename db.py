@@ -16,7 +16,7 @@ q2= cursor.execute(s2)
 
 
 
-df = pd.read_excel(r'C:\Users\dou\PycharmProjects\dress\data\Attribute DataSet.xlsx')
+df = pd.read_excel(r'C:\Users\amir2\PycharmProjects\dbTask\data\Attribute DataSet.xlsx')
 for index, row in df.iterrows():
     s3 = "insert into selldb.attribute(Dress_ID, Style, Price,	Rating,	Size, Season, NeckLine, SleeveLength, waiseline, Material, FabricType, Decoration, Pattern_Type, Recommendation)" \
          "values({},'{}','{}',{},'{}','{}','{}','{}','{}','{}','{}','{}','{}',{});".format(row['Dress_ID'],row['Style'],row['Price'],row['Rating'],row['Size'],row['Season'],row['NeckLine'],row['SleeveLength'],row['waiseline'],row['Material'],row['FabricType'],row['Decoration'],row['Pattern Type'],row['Recommendation'])
@@ -26,14 +26,17 @@ for index, row in df.iterrows():
 #s4 = cursor.execute("delete from selldb.attribute;")
 #cursor.execute(s4)
 
-df2 = pd.read_excel(r'C:\Users\dou\PycharmProjects\dress\data\Dress Sales.xlsx')
+df2 = pd.read_excel(r'C:\Users\amir2\PycharmProjects\dbTask\data\Dress Sales.xlsx')
 
 df2.fillna('null', inplace=True)
 
 
 for index,row in df2.iterrows():
     s4 = "insert into selldb.dress(Dress_ID, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23)" \
-         "values({},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{});".format(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8] if type(row[8]) != str else 'null' ,row[9] if type(row[9]) != str else 'null',row[10] if type(row[10]) != str else 'null',row[11]  if type(row[11]) != str else 'null',row[12] if type(row[12]) != str else 'null',row[13] if type(row[13]) != str else 'null',row[14],row[15],row[16],row[17],row[18],row[19],row[20],row[21],row[22],row[23])
+         "values({},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{});".format(
+        row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],
+        row[8] if type(row[8]) != str else 'null' ,row[9] if type(row[9]) != str else 'null',row[10] if type(row[10]) != str else 'null',row[11]  if type(row[11]) != str else 'null',row[12] if type(row[12]) != str else 'null',row[13] if type(row[13]) != str else 'null',
+        row[14],row[15],row[16],row[17],row[18],row[19],row[20],row[21],row[22],row[23])
     cursor.execute(s4)
 
 mydb.commit()
