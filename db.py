@@ -6,21 +6,22 @@ cursor = mydb.cursor()
 
 def createDatabase():
     cursor.execute("CREATE DATABASE IF NOT EXISTS selldb;")
+    cursor.execute("use selldb;")
 
 def createTables():
-    cursor.execute("DROP table if EXISTS selldb.attribute;")
-    cursor.execute("DROP table if EXISTS selldb.dress;")
+    cursor.execute("DROP table if EXISTS attribute;")
+    cursor.execute("DROP table if EXISTS dress;")
 
-    attributeQuery = "create table if not exists selldb.attribute(Dress_ID int(20), Style varchar(30), Price varchar(20),	Rating FLOAT(3),	Size varchar(10),	Season varchar(10),	NeckLine varchar(30),	SleeveLength varchar(30),	waiseline varchar(20),	Material varchar(20),	FabricType varchar(20),	Decoration varchar(20),	Pattern_Type varchar(20),	Recommendation int(1));"
-    dressQuery = "create table if not exists selldb.dress(Dress_ID int(20), c1 int(20),	c2 int(20),	c3 int(20),	c4 int(20),	c5 int(20),	c6 int(20),	c7 int(20),	c8 int(20),	c9 int(20),	c10 int(20),	c11 int(20),	c12 int(20),	c13 int(20),	c14 int(20),	c15 int(20),	c16 int(20),	c17 int(20),	c18 int(20),	c19 int(20),	c20 int(20),	c21 int(20),	c22 int(20),	c23 int(20));"
+    attributeQuery = "create table if not exists attribute(Dress_ID int(20), Style varchar(30), Price varchar(20),	Rating FLOAT(3),	Size varchar(10),	Season varchar(10),	NeckLine varchar(30),	SleeveLength varchar(30),	waiseline varchar(20),	Material varchar(20),	FabricType varchar(20),	Decoration varchar(20),	Pattern_Type varchar(20),	Recommendation int(1));"
+    dressQuery = "create table if not exists dress(Dress_ID int(20), c1 int(20),	c2 int(20),	c3 int(20),	c4 int(20),	c5 int(20),	c6 int(20),	c7 int(20),	c8 int(20),	c9 int(20),	c10 int(20),	c11 int(20),	c12 int(20),	c13 int(20),	c14 int(20),	c15 int(20),	c16 int(20),	c17 int(20),	c18 int(20),	c19 int(20),	c20 int(20),	c21 int(20),	c22 int(20),	c23 int(20));"
 
     cursor.execute(attributeQuery)
     cursor.execute(dressQuery)
 
 def inserDataToAttribute():
-    df = pd.read_excel(r'C:\Users\amir2\PycharmProjects\dbTask\data\Attribute DataSet.xlsx')
+    df = pd.read_excel(r'C:\Users\dou\PycharmProjects\dress\data\Attribute DataSet.xlsx')
     for index, row in df.iterrows():
-        attributeInsertQuery = "insert into selldb.attribute(Dress_ID, Style, Price,	Rating,	Size, Season, NeckLine, SleeveLength, waiseline, Material, FabricType, Decoration, Pattern_Type, Recommendation)" \
+        attributeInsertQuery = "insert into attribute(Dress_ID, Style, Price,	Rating,	Size, Season, NeckLine, SleeveLength, waiseline, Material, FabricType, Decoration, Pattern_Type, Recommendation)" \
              "values({},'{}','{}',{},'{}','{}','{}','{}','{}','{}','{}','{}','{}',{});".format(row['Dress_ID'],
                                                                                                row['Style'],
                                                                                                row['Price'],
@@ -39,10 +40,10 @@ def inserDataToAttribute():
 
 
 def inserDataToDress():
-    df2 = pd.read_excel(r'C:\Users\amir2\PycharmProjects\dbTask\data\Dress Sales.xlsx')
+    df2 = pd.read_excel(r'C:\Users\dou\PycharmProjects\dress\data\Dress Sales.xlsx')
     df2.fillna('null', inplace=True)
     for index, row in df2.iterrows():
-        dressInsertQuery = "insert into selldb.dress(Dress_ID, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23)" \
+        dressInsertQuery = "insert into dress(Dress_ID, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23)" \
              "values({},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{});".format(
             row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7],
             row[8] if type(row[8]) != str else 'null', row[9] if type(row[9]) != str else 'null',
